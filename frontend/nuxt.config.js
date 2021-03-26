@@ -28,7 +28,17 @@ export default {
 
   modules: ['nuxt-buefy', '@nuxtjs/axios'],
 
-  axios: {},
+  axios: {
+    proxy: true,
+  },
+
+  proxy: {
+    '/api/': {
+      target: 'http://localhost:3001',
+      pathRewrite: { '^/api/': '' },
+      changeOrigin: true,
+    },
+  },
 
   build: {},
 }
