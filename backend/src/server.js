@@ -3,7 +3,7 @@ const db = require("./database/config");
 const mongoose = require("mongoose");
 const _ = require("lodash")
 const fetch = require("node-fetch");
-const UserSchema = require("./app/model/UserSchema");
+const UserSchema = require("./app/schema/UserSchema");
 
 class App {
   constructor() {
