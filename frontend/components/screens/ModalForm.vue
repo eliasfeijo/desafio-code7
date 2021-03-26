@@ -37,7 +37,7 @@
       </section>
       <footer class="modal-card-foot">
         <b-button label="Fechar" @click="$emit('close')" />
-        <b-button label="Cadastrar" type="is-primary" @click="onSubmitForm" />
+        <b-button label="Salvar" type="is-primary" @click="onSubmitForm" />
       </footer>
     </div>
   </form>

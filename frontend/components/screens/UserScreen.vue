@@ -10,7 +10,7 @@
       <p class="is-size-5">
         Dívida Total: {{ selectedUser.formattedDebtTotal }}
       </p>
-      <b-button type="is-primary" class="mt-4" @click="isModalActive = true"
+      <b-button type="is-primary" class="mt-4" @click="openModalCreate"
         >Cadastrar Dívida</b-button
       >
     </div>
@@ -34,7 +34,11 @@
       aria-modal
     >
       <template #default="props">
-        <modal-form :is-edit="isEditModal" @close="props.close"></modal-form>
+        <modal-form
+          :is-edit="isEditModal"
+          @close="props.close"
+          @formSubmitted="onFormSubmitted"
+        ></modal-form>
       </template>
     </b-modal>
   </div>
@@ -71,6 +75,16 @@ export default {
   computed: {
     selectedUser() {
       return this.$store.state.selectedUser
+    },
+  },
+  methods: {
+    openModalCreate() {
+      this.isEditModal = false
+      this.isModalActive = true
+    },
+    onFormSubmitted(debt) {
+      console.log('onFormSubmitted', debt)
+      this.isModalActive = false
     },
   },
 }
