@@ -73,6 +73,15 @@ export default {
         Numeral.locale('pt-br')
         user.formattedDebtTotal =
           'R$ ' + Numeral(user.debtTotal).format('0,000.00')
+        user.listDebt = user.listDebt.map((debt, index) => {
+          const dueDate = new Date(debt.dueDate)
+          const day = dueDate.getDate().toString().padStart(2, 0)
+          const month = (dueDate.getMonth() + 1).toString().padStart(2, 0)
+          const year = dueDate.getFullYear()
+          debt.formattedDueDate = `${day}/${month}/${year}`
+          debt.formattedValue = 'R$ ' + Numeral(debt.value).format('0,000.00')
+          return debt
+        })
         return user
       })
       vm.$store.dispatch('setListUser', listUser)
