@@ -7,12 +7,6 @@
     >
       <div class="navbar-brand">
         <a class="navbar-item" href="/"> Desafio Code7 </a>
-
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
       </div>
     </nav>
 
