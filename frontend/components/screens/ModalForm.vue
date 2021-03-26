@@ -17,19 +17,14 @@
         </b-field>
 
         <b-field label="Razão">
-          <b-input
-            type="text"
-            :value="reason"
-            placeholder="Razão da Dívida"
-            required
-          >
+          <b-input v-model="reason" placeholder="Razão da Dívida" required>
           </b-input>
         </b-field>
 
         <b-field label="Data">
           <b-input
-            type="text"
-            :value="dueDate"
+            v-model="dueDate"
+            v-mask="'##/##/####'"
             placeholder="Data de vencimento"
             required
           >
@@ -46,11 +41,13 @@
 
 <script>
 import { VMoney } from 'v-money'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'ModalForm',
   directives: {
     money: VMoney,
+    mask,
   },
   props: {
     isEdit: {
