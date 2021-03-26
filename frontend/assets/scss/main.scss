@@ -75,6 +75,11 @@ $link: #64a5dd;
 $link-invert: findColorInvert($link);
 $link-focus-border: #64a5dd;
 
+// Tables
+$table-row-hover-background-color: #e2e2e2;
+// $table-striped-row-even-background-color
+// $table-striped-row-even-hover-background-color
+
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";

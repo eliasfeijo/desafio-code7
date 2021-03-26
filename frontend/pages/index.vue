@@ -2,24 +2,13 @@
   <section class="section">
     <h1 class="is-size-3">Selecione um Usuário</h1>
     <section class="section">
-      <table v-if="!isLoading" class="table">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Dívida</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in listUser" :key="user._id">
-            <td>{{ user.name }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.formattedDebtTotal }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <b-table
+        class="cursor-pointer"
+        :data="listUser"
+        :columns="tableColumns"
+        hoverable
+        @click="onUserSelect"
+      ></b-table>
     </section>
     <b-loading v-model="isLoading" :is-full-page="true">
       <clip-loader
@@ -44,6 +33,24 @@ export default {
   data() {
     return {
       isLoading: true,
+      tableColumns: [
+        {
+          field: 'name',
+          label: 'Nome',
+        },
+        {
+          field: 'username',
+          label: 'Username',
+        },
+        {
+          field: 'email',
+          label: 'E-mail',
+        },
+        {
+          field: 'formattedDebtTotal',
+          label: 'Dívida',
+        },
+      ],
     }
   },
   computed: {
