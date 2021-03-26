@@ -1,10 +1,13 @@
 <template>
   <section class="section">
-    <div>Usuários</div>
+    <h1 class="is-size-3">Selecione um Usuário</h1>
     <section class="section">
-      <div v-for="user in listUser" :key="user._id">
-        {{ user.name }}
-      </div>
+      <b-table
+        :data="listUser"
+        :columns="tableColumns"
+        hoverable
+        @select="onUserSelect"
+      ></b-table>
     </section>
     <b-loading v-model="isLoading" :is-full-page="true">
       <clip-loader
@@ -28,12 +31,31 @@ export default {
     return {
       isLoading: true,
       listUser: [],
+      tableColumns: [
+        {
+          field: 'name',
+          label: 'Nome',
+        },
+        {
+          field: 'username',
+          label: 'Username',
+        },
+        {
+          field: 'email',
+          label: 'Email',
+        },
+      ],
     }
   },
   async mounted() {
     const listUser = await this.$axios.$get('/api/users')
     this.listUser = listUser
     this.isLoading = false
+  },
+  methods: {
+    onUserSelect(user) {
+      console.log('user:', user)
+    },
   },
 }
 </script>
