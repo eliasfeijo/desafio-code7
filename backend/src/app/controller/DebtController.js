@@ -16,6 +16,15 @@ class DebtController {
       return res.sendStatus(404);
     }
   }
+  async findByUser(req, res) {
+    const debt = await DebtSchema.find({user: req.params.id});
+    if(debt) {
+      return res.json(debt);
+    }
+    else {
+      return res.sendStatus(404);
+    }
+  }
   async create(req, res) {
     const debt = await DebtSchema.create(req.body);
     if(debt.id) {

@@ -6,6 +6,7 @@ const routes = express.Router();
 
 routes.get("/users", UserController.index);
 routes.get("/users/:id", UserController.find);
+routes.get("/users/:id/debts", DebtController.findByUser);
 
 routes.get("/debts", DebtController.index);
 routes.get("/debts/:id", DebtController.find);
