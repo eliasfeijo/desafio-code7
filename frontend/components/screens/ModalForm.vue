@@ -6,7 +6,7 @@
         <button type="button" class="delete" @click="$emit('close')" />
       </header>
       <section class="modal-card-body">
-        <b-field label="Valor">
+        <b-field label="Valor" :type="valueFieldType" :message="valueMessage">
           <b-input
             v-model.lazy="value"
             v-money="moneyConfig"
@@ -16,12 +16,16 @@
           </b-input>
         </b-field>
 
-        <b-field label="Razão">
+        <b-field label="Razão" :type="reasonFieldType" :message="reasonMessage">
           <b-input v-model="reason" placeholder="Razão da Dívida" required>
           </b-input>
         </b-field>
 
-        <b-field label="Data">
+        <b-field
+          label="Data"
+          :type="dueDateFieldType"
+          :message="dueDateMessage"
+        >
           <b-input
             v-model="dueDate"
             v-mask="'##/##/####'"
@@ -68,8 +72,14 @@ export default {
   data() {
     return {
       reason: this.debt.reason,
+      reasonFieldType: null,
+      reasonMessage: null,
       dueDate: this.debt.dueDate,
+      dueDateFieldType: null,
+      dueDateMessage: null,
       value: this.debt.value,
+      valueFieldType: null,
+      valueMessage: null,
       moneyConfig: {
         decimal: ',',
         thousands: '.',
@@ -96,8 +106,51 @@ export default {
   },
   methods: {
     onSubmitForm(e) {
-      console.log(this.value, this.reason, this.dueDate)
-      console.log(this.unmaskedValue, this.reason, this.unmaskedDueDate)
+      const isFormValid = this.validateFields()
+      if (isFormValid) {
+        const debt = {
+          value: this.unmaskedValue,
+          reason: this.reason,
+          dueDate: this.unmaskedDueDate.toISOString(),
+        }
+        this.$emit('formSubmitted', debt)
+      }
+    },
+    validateFields() {
+      let valid = true
+      if (this.unmaskedValue <= 0) {
+        valid = false
+        this.valueFieldType = 'is-danger'
+        this.valueMessage = 'Valor precisa ser maior que zero'
+      } else {
+        this.valueFieldType = null
+        this.valueMessage = null
+      }
+      if (this.reason.length < 3) {
+        valid = false
+        this.reasonFieldType = 'is-danger'
+        this.reasonMessage = 'Mínimo de 3 caracteres'
+      } else {
+        this.reasonFieldType = null
+        this.reasonMessage = null
+      }
+      if (
+        Object.prototype.toString.call(this.unmaskedDueDate) === '[object Date]'
+      ) {
+        if (isNaN(this.unmaskedDueDate.getTime())) {
+          valid = false
+          this.dueDateFieldType = 'is-danger'
+          this.dueDateMessage = 'Data inválida'
+        } else {
+          this.dueDateFieldType = null
+          this.dueDateMessage = null
+        }
+      } else {
+        valid = false
+        this.dueDateFieldType = 'is-danger'
+        this.dueDateMessage = 'Data inválida'
+      }
+      return valid
     },
   },
 }

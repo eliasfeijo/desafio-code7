@@ -29,7 +29,6 @@
       v-model="isModalActive"
       has-modal-card
       trap-focus
-      :destroy-on-hide="false"
       aria-role="dialog"
       aria-label="Modal Dívida"
       aria-modal
