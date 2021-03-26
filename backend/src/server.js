@@ -43,7 +43,6 @@ class App {
     });
     if(!hasUsers) {
       const response = await fetch('https://jsonplaceholder.typicode.com/users');
-      console.log(response);
       if(!response.ok) {
         const message = `An error has occured: ${response.status}`;
         throw new Error(message);
@@ -51,8 +50,7 @@ class App {
       const listUser = await response.json();
       console.log(listUser);
       _.forEach(listUser, user => {
-        const newUser = new UserSchema(user);
-        newUser.save();
+        UserSchema.create(user);
       });
     }
   }
