@@ -22,6 +22,7 @@
           :data="selectedUser.listDebt"
           :columns="tableColumns"
           hoverable
+          @click="openModalEdit"
         ></b-table>
       </div>
     </div>
@@ -36,6 +37,7 @@
       <template #default="props">
         <modal-form
           :is-edit="isEditModal"
+          :debt="debtForEdition"
           @close="props.close"
           @formSubmitted="onFormSubmitted"
         ></modal-form>
@@ -46,6 +48,7 @@
 
 <script>
 import ModalForm from './ModalForm'
+import { formatDate } from '~/helpers/DateHelper'
 
 export default {
   name: 'UserScreen',
@@ -70,6 +73,7 @@ export default {
       ],
       isModalActive: false,
       isEditModal: false,
+      debtForEdition: null,
     }
   },
   computed: {
@@ -79,7 +83,29 @@ export default {
   },
   methods: {
     openModalCreate() {
+      this.debtForEdition = {
+        value: '',
+        reason: '',
+        dueDate: '',
+      }
       this.isEditModal = false
+      this.isModalActive = true
+    },
+    openModalEdit(debt) {
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      })
+      const formattedValue = formatter.format(debt.value)
+
+      const formattedDate = formatDate(debt.dueDate)
+
+      this.debtForEdition = {
+        value: formattedValue,
+        reason: debt.reason,
+        dueDate: formattedDate,
+      }
+      this.isEditModal = true
       this.isModalActive = true
     },
     onFormSubmitted(debt) {

@@ -1,6 +1,7 @@
 import Numeral from 'numeral'
 import 'numeral/locales/pt-br'
 import _ from 'lodash'
+import { formatDate } from '~/helpers/DateHelper'
 
 export const state = () => ({
   currentScreen: 'HOME',
@@ -49,13 +50,9 @@ export const actions = {
   },
 }
 
-function setFormattedDebtFields(user) {
+function setFormattedDebtFields(context, user) {
   const listDebt = user.listDebt.map((debt, index) => {
-    const dueDate = new Date(debt.dueDate)
-    const day = dueDate.getDate().toString().padStart(2, 0)
-    const month = (dueDate.getMonth() + 1).toString().padStart(2, 0)
-    const year = dueDate.getFullYear()
-    debt.formattedDueDate = `${day}/${month}/${year}`
+    debt.formattedDueDate = formatDate(debt.dueDate)
     debt.formattedValue = 'R$ ' + Numeral(debt.value).format('0,000.00')
     return debt
   })
