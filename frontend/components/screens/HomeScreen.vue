@@ -22,8 +22,6 @@
 
 <script>
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
-import Numeral from 'numeral'
-import 'numeral/locales/pt-br'
 
 export default {
   name: 'HomeScreen',
@@ -68,22 +66,7 @@ export default {
     },
     fetchListUser: async (vm) => {
       vm.isLoading = true
-      let listUser = await vm.$axios.$get('/api/users')
-      listUser = listUser.map((user, index) => {
-        Numeral.locale('pt-br')
-        user.formattedDebtTotal =
-          'R$ ' + Numeral(user.debtTotal).format('0,000.00')
-        user.listDebt = user.listDebt.map((debt, index) => {
-          const dueDate = new Date(debt.dueDate)
-          const day = dueDate.getDate().toString().padStart(2, 0)
-          const month = (dueDate.getMonth() + 1).toString().padStart(2, 0)
-          const year = dueDate.getFullYear()
-          debt.formattedDueDate = `${day}/${month}/${year}`
-          debt.formattedValue = 'R$ ' + Numeral(debt.value).format('0,000.00')
-          return debt
-        })
-        return user
-      })
+      const listUser = await vm.$axios.$get('/api/users')
       vm.$store.dispatch('setListUser', listUser)
       vm.isLoading = false
     },

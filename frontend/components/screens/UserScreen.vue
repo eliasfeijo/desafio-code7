@@ -83,8 +83,27 @@ export default {
       this.isModalActive = true
     },
     onFormSubmitted(debt) {
-      console.log('onFormSubmitted', debt)
       this.isModalActive = false
+      debt.user = this.selectedUser._id
+      if (this.isEditModal) {
+        // TODO: Implement edit
+      } else {
+        this.createUserDebt(debt)
+      }
+    },
+    createUserDebt(debt) {
+      this.$axios
+        .post('/api/debts', debt)
+        .then((response) => {
+          if (response.status === 200 || response.status === 201) {
+            const newDebt = response.data
+            this.$store.dispatch('addSelectedUserDebt', newDebt)
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.err('Error creating user debt', err)
+        })
     },
   },
 }
