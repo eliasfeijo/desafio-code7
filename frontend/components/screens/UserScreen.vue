@@ -18,7 +18,7 @@
       <div class="column is-half is-offset-one-quarter">
         <b-table
           v-if="selectedUser.listDebt.length > 0"
-          class="cursor-pointer"
+          class="cursor-pointer mt-5"
           :data="selectedUser.listDebt"
           :columns="tableColumns"
           hoverable

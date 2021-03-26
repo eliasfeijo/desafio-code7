@@ -16,6 +16,10 @@ body, html {
     }
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 
