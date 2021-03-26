@@ -8,8 +8,8 @@
       <section class="modal-card-body">
         <b-field label="Valor">
           <b-input
-            type="number"
-            :value="value"
+            v-model.lazy="value"
+            v-money="moneyConfig"
             placeholder="Valor da Dívida"
             required
           >
@@ -45,8 +45,13 @@
 </template>
 
 <script>
+import { VMoney } from 'v-money'
+
 export default {
   name: 'ModalForm',
+  directives: {
+    money: VMoney,
+  },
   props: {
     isEdit: {
       type: Boolean,
@@ -68,6 +73,12 @@ export default {
       reason: this.debt.reason,
       dueDate: this.debt.dueDate,
       value: this.debt.value,
+      moneyConfig: {
+        decimal: ',',
+        thousands: '.',
+        prefix: 'R$ ',
+        precision: 2,
+      },
     }
   },
   computed: {
