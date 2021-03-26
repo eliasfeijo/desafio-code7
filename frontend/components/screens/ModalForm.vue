@@ -33,7 +33,7 @@
       </section>
       <footer class="modal-card-foot">
         <b-button label="Fechar" @click="$emit('close')" />
-        <b-button label="Cadastrar" type="is-primary" />
+        <b-button label="Cadastrar" type="is-primary" @click="onSubmitForm" />
       </footer>
     </div>
   </form>
@@ -81,6 +81,23 @@ export default {
   computed: {
     labelTitle() {
       return this.isEdit ? 'Editar Dívida' : 'Cadastrar Dívida'
+    },
+    unmaskedValue() {
+      const value = Number(
+        this.value.replace('R$', '').trim().replace('.', '').replace(',', '.')
+      )
+      return value
+    },
+    unmaskedDueDate() {
+      const [day, month, year] = this.dueDate.split('/')
+      const dueDate = new Date(`${month}/${day}/${year}`)
+      return dueDate
+    },
+  },
+  methods: {
+    onSubmitForm(e) {
+      console.log(this.value, this.reason, this.dueDate)
+      console.log(this.unmaskedValue, this.reason, this.unmaskedDueDate)
     },
   },
 }
