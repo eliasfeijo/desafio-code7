@@ -1,5 +1,6 @@
 
 const DebtSchema = require("../schema/DebtSchema");
+const _ = require("lodash");
 
 class DebtController {
   async index(req, res) {
@@ -25,17 +26,14 @@ class DebtController {
     }
 
   }
-  async edit(req, res) {
-    const debt = await DebtSchema.findById(req.params.id);
-    if(debt) {
-      debt = new DebtSchema(debt);
-      debt.save();
+  edit(req, res) {
+    DebtSchema.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, debt) => {
+      if(err) {
+        console.log(err);
+        return res.status(404).send('Debt not found');
+      }
       return res.json(debt);
-    }
-    else {
-      return res.status(404).send('Debt not found');
-
-    }
+    });
   }
   async delete(req, res) {
     const debt = await DebtSchema.findByIdAndDelete(req.params.id, (err) => {
