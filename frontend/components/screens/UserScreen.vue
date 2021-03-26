@@ -10,11 +10,14 @@
       <p class="is-size-5">
         Dívida Total: {{ selectedUser.formattedDebtTotal }}
       </p>
-      <b-button type="is-primary" class="mt-4">Cadastrar Dívida</b-button>
+      <b-button type="is-primary" class="mt-4" @click="isModalActive = true"
+        >Cadastrar Dívida</b-button
+      >
     </div>
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <b-table
+          v-if="selectedUser.listDebt.length > 0"
           class="cursor-pointer"
           :data="selectedUser.listDebt"
           :columns="tableColumns"
@@ -22,12 +25,30 @@
         ></b-table>
       </div>
     </div>
+    <b-modal
+      v-model="isModalActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Modal Dívida"
+      aria-modal
+    >
+      <template #default="props">
+        <modal-form :is-edit="isEditModal" @close="props.close"></modal-form>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import ModalForm from './ModalForm'
+
 export default {
   name: 'UserScreen',
+  components: {
+    ModalForm,
+  },
   data() {
     return {
       tableColumns: [
@@ -44,6 +65,8 @@ export default {
           label: 'Valor',
         },
       ],
+      isModalActive: false,
+      isEditModal: false,
     }
   },
   computed: {
