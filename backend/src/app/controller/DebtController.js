@@ -4,11 +4,11 @@ const _ = require("lodash");
 
 class DebtController {
   async index(req, res) {
-    const listDebt = await DebtSchema.find({});
+    let listDebt = await DebtSchema.find({}).populate("user");
     return res.json(listDebt);
   }
   async find(req, res) {
-    const debt = await DebtSchema.findById(req.params.id);
+    const debt = await DebtSchema.findById(req.params.id).populate("user");
     if(debt) {
       return res.json(debt);
     }
