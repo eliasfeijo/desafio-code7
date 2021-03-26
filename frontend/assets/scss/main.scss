@@ -71,9 +71,9 @@ $colors: mergeColorMaps(
 );
 
 // Links
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
+$link: #64a5dd;
+$link-invert: findColorInvert($link);
+$link-focus-border: #64a5dd;
 
 // Import Bulma and Buefy styles
 @import "~bulma";

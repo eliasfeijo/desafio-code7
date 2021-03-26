@@ -17,6 +17,15 @@
     </nav>
 
     <nuxt />
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Desafio Code7</strong> feito por
+          <a href="https://elftechnologies.com">Elias Feijó</a>.
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
 
