@@ -1,6 +1,11 @@
 <template>
   <section class="section">
-    <div>Frontend</div>
+    <div>Usuários</div>
+    <section class="section">
+      <div v-for="user in listUser" :key="user._id">
+        {{ user.name }}
+      </div>
+    </section>
     <b-loading v-model="isLoading" :is-full-page="true">
       <clip-loader
         :loading="isLoading"
@@ -22,7 +27,13 @@ export default {
   data() {
     return {
       isLoading: true,
+      listUser: [],
     }
+  },
+  async mounted() {
+    const listUser = await this.$axios.$get('/api/users')
+    this.listUser = listUser
+    this.isLoading = false
   },
 }
 </script>
