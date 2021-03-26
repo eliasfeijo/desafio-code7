@@ -62,6 +62,7 @@ export default {
       type: Object,
       default: () => {
         return {
+          _id: '',
           reason: '',
           dueDate: '',
           value: '',
@@ -112,6 +113,9 @@ export default {
           value: this.unmaskedValue,
           reason: this.reason,
           dueDate: this.unmaskedDueDate.toISOString(),
+        }
+        if (this.debt._id) {
+          debt._id = this.debt._id
         }
         this.$emit('formSubmitted', debt)
       }

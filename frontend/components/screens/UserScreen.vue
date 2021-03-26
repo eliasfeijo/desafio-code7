@@ -101,6 +101,7 @@ export default {
       const formattedDate = formatDate(debt.dueDate)
 
       this.debtForEdition = {
+        _id: debt._id,
         value: formattedValue,
         reason: debt.reason,
         dueDate: formattedDate,
@@ -112,7 +113,7 @@ export default {
       this.isModalActive = false
       debt.user = this.selectedUser._id
       if (this.isEditModal) {
-        // TODO: Implement edit
+        this.editUserDebt(debt)
       } else {
         this.createUserDebt(debt)
       }
@@ -128,7 +129,23 @@ export default {
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
-          console.err('Error creating user debt', err)
+          console.log('Error creating user debt', err)
+        })
+    },
+    editUserDebt(debt) {
+      const debtId = debt._id
+      delete debt._id
+      this.$axios
+        .put(`/api/debts/${debtId}`, debt)
+        .then((response) => {
+          if (response.status === 200 || response.status === 201) {
+            const newDebt = response.data
+            this.$store.dispatch('editSelectedUserDebt', newDebt)
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('Error editing user debt', err)
         })
     },
   },
