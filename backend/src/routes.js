@@ -1,9 +1,9 @@
 
 const express = require("express");
+const DebtController = require("./app/controller/DebtController");
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-  return res.send("Minha primeira rota!");
-});
+routes.get("/debts", DebtController.index);
+routes.post("/debts", DebtController.create);
 
 module.exports = routes;
