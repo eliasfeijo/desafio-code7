@@ -6,7 +6,12 @@
       aria-label="main navigation"
     >
       <div class="navbar-brand">
-        <a class="navbar-item" href="/"> Desafio Code7 </a>
+        <a
+          class="navbar-item"
+          @click="$store.dispatch('setCurrentScreen', 'HOME')"
+        >
+          Desafio Code7
+        </a>
       </div>
     </nav>
 

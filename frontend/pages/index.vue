@@ -4,18 +4,20 @@
       <home-screen v-if="currentScreen === 'HOME'" />
     </transition>
     <transition name="slide-fade">
-      <div>test</div>
+      <user-screen v-if="currentScreen === 'USER'" />
     </transition>
   </section>
 </template>
 
 <script>
 import HomeScreen from '~/components/screens/HomeScreen'
+import UserScreen from '~/components/screens/UserScreen'
 
 export default {
   name: 'HomePage',
   components: {
     HomeScreen,
+    UserScreen,
   },
   computed: {
     currentScreen() {

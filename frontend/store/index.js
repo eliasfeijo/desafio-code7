@@ -1,6 +1,7 @@
 export const state = () => ({
   currentScreen: 'HOME',
   listUser: [],
+  selectedUser: null,
 })
 
 export const mutations = {
@@ -10,6 +11,9 @@ export const mutations = {
   setListUser(state, listUser) {
     state.listUser = listUser
   },
+  setSelectedUser(state, user) {
+    state.selectedUser = user
+  },
 }
 
 export const actions = {
@@ -18,5 +22,8 @@ export const actions = {
   },
   setListUser(context, listUser) {
     context.commit('setListUser', listUser)
+  },
+  setSelectedUser(context, user) {
+    context.commit('setSelectedUser', user)
   },
 }
