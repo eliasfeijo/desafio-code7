@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     onUserSelect(user) {
-      console.log('user:', user)
+      this.$store.dispatch('setCurrentScreen', 'USER')
     },
     fetchListUser: async (vm) => {
       vm.isLoading = true

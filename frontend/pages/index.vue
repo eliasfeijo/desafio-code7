@@ -1,6 +1,11 @@
 <template>
   <section class="section">
-    <home-screen v-if="currentScreen === 'HOME'" />
+    <transition name="slide-fade">
+      <home-screen v-if="currentScreen === 'HOME'" />
+    </transition>
+    <transition name="slide-fade">
+      <div>test</div>
+    </transition>
   </section>
 </template>
 
