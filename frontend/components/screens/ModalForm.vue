@@ -38,6 +38,12 @@
       <footer class="modal-card-foot">
         <b-button label="Fechar" @click="$emit('close')" />
         <b-button label="Salvar" type="is-primary" @click="onSubmitForm" />
+        <b-button
+          v-if="isEdit"
+          label="Deletar"
+          type="is-danger"
+          @click="onDeleteDebt"
+        />
       </footer>
     </div>
   </form>
@@ -106,6 +112,12 @@ export default {
     },
   },
   methods: {
+    onDeleteDebt(e) {
+      const hasAccepted = confirm('Tem certeza que quer deletar essa Dívida?')
+      if (hasAccepted) {
+        this.$emit('deleteDebt', this.debt._id)
+      }
+    },
     onSubmitForm(e) {
       const isFormValid = this.validateFields()
       if (isFormValid) {

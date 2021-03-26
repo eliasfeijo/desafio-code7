@@ -40,6 +40,7 @@
           :debt="debtForEdition"
           @close="props.close"
           @formSubmitted="onFormSubmitted"
+          @deleteDebt="deleteDebt"
         ></modal-form>
       </template>
     </b-modal>
@@ -117,6 +118,20 @@ export default {
       } else {
         this.createUserDebt(debt)
       }
+    },
+    deleteDebt(debtId) {
+      this.isModalActive = false
+      this.$axios
+        .delete(`/api/debts/${debtId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$store.dispatch('removeSelectedUserDebt', debtId)
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('Error creating user debt', err)
+        })
     },
     createUserDebt(debt) {
       this.$axios

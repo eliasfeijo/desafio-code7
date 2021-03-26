@@ -67,6 +67,25 @@ export const actions = {
 
     context.commit('setSelectedUser', selectedUser)
   },
+  removeSelectedUserDebt(context, debtId) {
+    const selectedUser = _.cloneDeep(context.state.selectedUser)
+    selectedUser.listDebt = selectedUser.listDebt.filter((debt, index) => {
+      if (debt._id === debtId) {
+        return false
+      }
+      return true
+    })
+    selectedUser.listDebt = setFormattedDebtFields(selectedUser)
+    let debtTotal = 0
+    _.forEach(selectedUser.listDebt, (d, i) => {
+      debtTotal += d.value
+    })
+    Numeral.locale('pt-br')
+    selectedUser.formattedDebtTotal =
+      'R$ ' + Numeral(debtTotal).format('0,000.00')
+
+    context.commit('setSelectedUser', selectedUser)
+  },
 }
 
 function setFormattedDebtFields(user) {
