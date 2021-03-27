@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+    environment:
+      - SERVER_URL=backend
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      - MONGODB_URI=mongodb://db:27017/desafio_code7
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped

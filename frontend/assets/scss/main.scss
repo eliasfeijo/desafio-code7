@@ -1,0 +1,109 @@
+body, html {
+    height: 100%;
+    > div#__nuxt {
+        height: 100%;
+        > div#__layout{
+            height: 100%;
+            > div {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                > section {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary: #526069;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(
+    (
+        "white": (
+            $white,
+            $black,
+        ),
+        "black": (
+            $black,
+            $white,
+        ),
+        "light": (
+            $light,
+            $light-invert,
+        ),
+        "dark": (
+            $dark,
+            $dark-invert,
+        ),
+        "primary": (
+            $primary,
+            $primary-invert,
+            $primary-light,
+            $primary-dark,
+        ),
+        "link": (
+            $link,
+            $link-invert,
+            $link-light,
+            $link-dark,
+        ),
+        "info": (
+            $info,
+            $info-invert,
+            $info-light,
+            $info-dark,
+        ),
+        "success": (
+            $success,
+            $success-invert,
+            $success-light,
+            $success-dark,
+        ),
+        "warning": (
+            $warning,
+            $warning-invert,
+            $warning-light,
+            $warning-dark,
+        ),
+        "danger": (
+            $danger,
+            $danger-invert,
+            $danger-light,
+            $danger-dark,
+        ),
+    ),
+    $custom-colors
+);
+
+// Links
+$link: #64a5dd;
+$link-invert: findColorInvert($link);
+$link-focus-border: #64a5dd;
+
+// Tables
+$table-row-hover-background-color: #e2e2e2;
+// $table-striped-row-even-background-color
+// $table-striped-row-even-hover-background-color
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+@import "transitions/all";
