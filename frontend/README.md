@@ -1,20 +1,21 @@
-# frontend
+# Frontend - Desafio Code7
 
-## Build Setup
+Este projeto foi feito com as seguintes tecnologias:
 
-```bash
-# install dependencies
-$ yarn install
+* Node.js
+* Nuxt.js (framework que usa o Vue.js)
+* Buefy (Bulma para Vue.js)
+* Sass
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+Entre outras que você pode ver no arquivo `package.json`.
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+## Dependências para desenvolvimento
 
-# generate static project
-$ yarn generate
-```
+* Node.js
+* Yarn
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Como rodar para desenvolvimento
+
+Igual ao backend, primeiro precisamos criar o arquivo `.env` (no diretório frontend). Iremos colocar a variável de ambiente `SERVER_URL=localhost`.
+
+Rodar `yarn install`, e depois que terminar, rodar `yarn dev`.

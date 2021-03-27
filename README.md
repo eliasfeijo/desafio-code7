@@ -5,7 +5,7 @@ Este repositório contém 2 projetos separados:
 * backend
 * frontend
 
-Ambos feitos com Node.js, mais detalhes no README.md que está no diretório de cada projeto.
+Ambos feitos com Node.js, mais detalhes sobre as tecnologias no README.md no diretório de cada projeto.
 
 ## Requisitos para rodar
 
