@@ -42,6 +42,7 @@ export const actions = {
     const selectedUser = _.cloneDeep(context.state.selectedUser)
     Numeral.locale('pt-br')
     const debtTotal = selectedUser.debtTotal + debt.value
+    selectedUser.debtTotal = debtTotal
     selectedUser.formattedDebtTotal =
       'R$ ' + Numeral(debtTotal).format('0,000.00')
     selectedUser.listDebt.push(debt)
