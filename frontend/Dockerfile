@@ -1,6 +1,5 @@
 FROM node:14.16.0-alpine
 
-RUN mkdir -p /usr/src/frontend
 WORKDIR /usr/src/frontend
 
 COPY . /usr/src/frontend
